@@ -53,3 +53,11 @@ h2{
     text-align: center;
     color: red;
 }
+
+footer {
+    margin-right: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+}
