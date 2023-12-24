@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../css/style.css">
+    <script src=https://cdn.clublog.org/js/leaflet.js></script>
+    <link href=https://cdn.clublog.org/styles/leaflet.css rel=stylesheet>
+    <script src=https://cdn.clublog.org/js/terminator.js></script>
+    <link type="text/css" rel="stylesheet" href="../css/backlog.css">
+    <title>PA5ZL</title>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <i class="fas fa-user"></i>
+        </div>
+        <ul>
+            <li><a href="../index.html"><i class="fas fa-home"></i></a></li>
+            <li><a href="../html/backlog.html"><i class="fas fa-user"></i></a></li>
+            <li><a href="#"><i class="fas fa-user"></i></a></li>
+        </ul>
+    </nav>
+    <table class=contentTable>
+        <tr>
+            <td colspan=3 style=padding-top:15px>
+                <table width=100%>
+                    <tr>
+                        <td class=logo>
+                            <a id=clublogURL href=https://clublog.org/ target=_new>
+                                <img src=https://cdn.clublog.org/images/clublog-black.png width=95>
+                            </a>
+                        <td class=lastUpdate>
+                            <b>
+                                <span id=callsign></span>
+                            </b>
+                        <td class=clock>
+                            <span id=CurrentTime></span>
+                        <td class=numqsos>
+                            <span id=NumQSOs></span>
+                            &nbsp;QSOs
+                        <td class=rate>
+                            Rate: <span style=font-family:monospace;color:orange id=Rate>0</span>
+                            <span id=rateunit></span>
+                        <td>&nbsp;
+                </table>
+                <tr>
+                    <td class=statusBar colspan=3 id=statusBar>
+                        Connecting...
+                        <tr>
+                            <td valign=top class=activitygridtable id=activitygridtable>
+                                <table class=activitygrid>
+                                    <tr>
+                                        <th class=spacerCell>
+                                        <th>160
+                                        <th>80
+                                        <th>60
+                                        <th>40
+                                        <th>30
+                                        <th>20
+                                        <th>17
+                                        <th>15
+                                        <th>12
+                                        <th>10
+                                        <th>6
+                                        <th>4
+                                        <th>2
+                                        <th>
+                                            70
+                                            <tr>
+                                                <th>Phone
+                                                <td id=P160>
+                                                <td id=P80>
+                                                <td id=P60>
+                                                <td id=P40>
+                                                <td id=P30>
+                                                <td id=P20>
+                                                <td id=P17>
+                                                <td id=P15>
+                                                <td id=P12>
+                                                <td id=P10>
+                                                <td id=P6>
+                                                <td id=P4>
+                                                <td id=P2>
+                                                <td id=P70>
+                                                    <tr>
+                                                        <th>CW
+                                                        <td id=C160>
+                                                        <td id=C80>
+                                                        <td id=C60>
+                                                        <td id=C40>
+                                                        <td id=C30>
+                                                        <td id=C20>
+                                                        <td id=C17>
+                                                        <td id=C15>
+                                                        <td id=C12>
+                                                        <td id=C10>
+                                                        <td id=C6>
+                                                        <td id=C4>
+                                                        <td id=C2>
+                                                        <td id=C70>
+                                                            <tr>
+                                                                <th>Data
+                                                                <td id=D160>
+                                                                <td id=D80>
+                                                                <td id=D60>
+                                                                <td id=D40>
+                                                                <td id=D30>
+                                                                <td id=D20>
+                                                                <td id=D17>
+                                                                <td id=D15>
+                                                                <td id=D12>
+                                                                <td id=D10>
+                                                                <td id=D6>
+                                                                <td id=D4>
+                                                                <td id=D2>
+                                                                <td id=D70>
+                                                                    <tr>
+                                                                        <td colspan=15 style=border-radius:0>
+                                                                            <div class=osm id=osm-map></div>
+                                </table>
+                            <td colspan=2 valign=top class=qsoList>
+                                <pre id=qsoList></pre>
+                                <tr>
+                                    <td colspan=2 style=padding-left:15px;padding-bottom:15px>
+                                        <table>
+                                            <tr>
+                                                <td class=loginfo>
+                                                    First QSO: <span class=qsoDateBox id=FirstQSO>-</span>
+                                                <td class=loginfo>
+                                                    Last QSO: <span class=qsoDateBox id=LastQSO>-</span>
+                                                <td class=loginfowide>
+                                                    Map pins: <span class=qsoDateBox id=Markers>-</span>
+                                                    Update rate: <span class=qsoDateBox id=Speed>-</span>
+                                                    <br>
+                                                    Heartbeat: <span class=syncinfo id=LastUpdate></span>
+                                                    &nbsp;<span class=connectedicon id=Connected>&#11093;</span>
+                                        </table>
+                                    <td style=padding-bottom:15px;padding-left:10px>
+                                        <table>
+                                            <tr>
+                                                <td class=button>
+                                                    <a id=logsearch target=clublog href=/logsearch/>Log Search</a>
+                                                <td class=button>
+                                                    <a id=spots target=clublog href=https://dxlite.g7vjr.org/>DX Spots</a>
+                                                <td class=infotext>
+                                                    Live Stream by Club Log<br>
+                                                    <a href=https://clublog.freshdesk.com/support/solutions/articles/3000092445>Documentation</a>
+                                                    | <a href=# onclick='alert("If your callsign position is not displayed accurately on the map, you can provide your correct locator. Login to Club Log and navigate to Settings > Locators.");'>Wrong locator?</a>
+                                        </table>
+                                        <tr>
+                                            <td colspan=3>
+                                                <table>
+                                                    <tr class=banner id=banner>
+                                                        <td class=bannerText id=bannerText>
+                                                </table>
+    </table>
+    <script>
+        var captured = /livestream\/([^&?]+)/.exec(window.location.href)[1];
+        var result = captured ? captured : '[unknown]';
+        var thiscallsign = result.toUpperCase();
+        var displaycallsign = thiscallsign;
+        var lastClubLog = new Date();
+        var moved = false;
+        var bNOAC = false;
+        Rate.innerHTML = 0;
+        NumQSOs.innerHTML = 0;
+        if (thiscallsign.length > 16) {
+            displaycallsign = thiscallsign.substring(0, 16) + "<small>&hellip;</small>";
+        }
+        callsign.innerHTML = displaycallsign;
+        logsearch.href = 'https://clublog.org/logsearch/' + thiscallsign;
+        spots.href = 'https://dxlite.g7vjr.org/?dx=' + thiscallsign;
+        var element = document.getElementById('osm-map');
+        var t = L.terminator();
+        var map = L.map(element, {
+            worldCopyJump: false,
+            maxBounds: 1
+        });
+        t.addTo(map);
+        setInterval(function() {
+            updateTerminator(t)
+        }, 1000);
+        function updateTerminator(t) {
+            var t2 = L.terminator();
+            t.setLatLngs(t2.getLatLngs());
+            t.redraw();
+        }
+        L.tileLayer('https://tile.clublog.org/{z}/{x}/{y}.png', {
+            attribution: '<span style="font-size:6pt;">&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors</span>'
+        }).addTo(map);
+        var markerGroup = L.layerGroup().addTo(map);
+        setInterval(function() {
+            var d = new Date();
+            var datetime = padDigits(d.getUTCHours(), 2) + ":" + padDigits(d.getUTCMinutes(), 2) + ":" + padDigits(d.getUTCSeconds(), 2);
+            CurrentTime.innerHTML = datetime;
+            var diff = Math.floor((d.getTime() - lastClubLog.getTime()) / 1000);
+            if (diff >= 60) {
+                Connected.innerHTML = "&#11093;";
+                if (bNOAC == false) {
+                    connect();
+                }
+            }
+        }, 1000);
+        function connect() {
+            var socket = new WebSocket("wss://clublog.org/json-livestream?call=" + thiscallsign);
+            socket.onerror = function() {
+                socket.close();
+            }
+            ;
+            socket.onmessage = function(e) {
+                var d = new Date();
+                lastClubLog = d;
+                var datetime = padDigits(d.getUTCHours(), 2) + ":" + padDigits(d.getUTCMinutes(), 2) + ":" + padDigits(d.getUTCSeconds(), 2);
+                LastUpdate.innerHTML = datetime;
+                Connected.innerHTML = "&#128154;";
+                if (e.data == "NOAC") {
+                    statusBar.innerHTML = "<p style='color:red;'><b>Live streaming not enabled</b>";
+                    Connected.innerHTML = "&#128683;";
+                    bNOAC = true;
+                    socket.close();
+                }
+                if (e.data == "THRO") {
+                    statusBar.innerHTML = "<p style='color:red;'><b>Too many connections from your IP address</b>";
+                    Connected.innerHTML = "&#128683;";
+                    bNOAC = true;
+                    socket.close();
+                    window.open('', '_self').close()
+                }
+                if (e.data == "PING") {
+                    socket.send("PONG");
+                }
+                if (IsJsonString(e.data)) {
+                    obj = JSON.parse(e.data);
+                    var obj = JSON.parse(e.data);
+                    if (obj.Callsign != thiscallsign) {
+                        console.log("Mismatched: " + obj.Callsign + " " + thiscallsign);
+                        socket.close();
+                        return;
+                    }
+                    qsoList.innerHTML = "";
+                    statusBar.innerHTML = "";
+                    bannerText.innerHTML = ""
+                    banner.style.display = "none"
+                    if (obj.Banner != "" && obj.BannertTime != "") {
+                        if (obj.Banner.length > 500) {
+                            obj.Banner = obj.Banner.substring(0, 500) + "<small>&hellip;</small>";
+                        }
+                        bannerText.innerHTML = "<b>" + obj.BannerTime + "</b> &mdash; " + obj.Banner
+                        banner.style.display = "block"
+                    }
+                    window.document.title = "Club Log Live Stream: " + thiscallsign;
+                    markerGroup.clearLayers();
+                    const allBands = [160, 80, 60, 40, 30, 20, 17, 15, 12, 10, 6, 4, 2, 70];
+                    allBands.forEach(clearTable);
+                    NumQSOs.innerHTML = obj.TotalQSOs;
+                    if (obj.Rate < 0.1) {
+                        obj.Rate = Math.round(obj.Rate * 720);
+                        rateunit.innerHTML = "&nbsp;QSOs/day";
+                    } else if (obj.Rate < 1) {
+                        obj.Rate = Math.round(obj.Rate * 60);
+                        rateunit.innerHTML = "&nbsp;QSOs/hr";
+                    } else {
+                        rateunit.innerHTML = "&nbsp;QSOs/min";
+                    }
+                    Rate.innerHTML = Math.round((obj.Rate * 10)) / 10;
+                    FirstQSO.innerHTML = obj.FirstQSO;
+                    Markers.innerHTML = obj.Size;
+                    Speed.innerHTML = obj.Speed + 's';
+                    if (moved == false) {
+                        var target = L.latLng(obj.DXLatitude, -obj.DXLongitude);
+                        map.setView(target, 1);
+                        moved = true;
+                        L.circleMarker([obj.DXLatitude, -obj.DXLongitude], {
+                            radius: 6,
+                            stroke: true,
+                            color: "#7518fc",
+                            opacity: 1,
+                            weight: 3,
+                            fill: false,
+                            pane: "tooltipPane"
+                        }).addTo(map).bindPopup("<b>" + thiscallsign + "</b>");
+                        L.circleMarker([obj.DXLatitude, -obj.DXLongitude + 360], {
+                            radius: 6,
+                            stroke: true,
+                            color: "#7518fc",
+                            opacity: 1,
+                            weight: 3,
+                            fill: false,
+                            pane: "tooltipPane"
+                        }).addTo(map).bindPopup("<b>" + thiscallsign + "</b>");
+                        L.circleMarker([obj.DXLatitude, -obj.DXLongitude - 360], {
+                            radius: 6,
+                            stroke: true,
+                            color: "#7518fc",
+                            opacity: 1,
+                            weight: 3,
+                            fill: false,
+                            pane: "tooltipPane"
+                        }).addTo(map).bindPopup("<b>" + thiscallsign + "</b>");
+                    }
+                    ListFrom = Math.min(30, obj.QSOs.length);
+                    for (index = (obj.QSOs.length) - 1; index >= 0; index--) {
+                        qso = obj.QSOs[index];
+                        qsodateobj = new Date();
+                        EpochSeconds = Math.round(qsodateobj.getTime() / 1000);
+                        if (qso.E) {
+                            QSOInterval = EpochSeconds - qso.E;
+                        } else {
+                            QSOInterval = 86400;
+                        }
+                        switch (qso.MC) {
+                        case 1:
+                            PageElement = "C" + qso.B;
+                            break;
+                        case 2:
+                            PageElement = "P" + qso.B;
+                            break;
+                        default:
+                            PageElement = "D" + qso.B;
+                            break;
+                        }
+                        CellColor = "indianred";
+                        pinRadius = 2;
+                        LastQSO.innerHTML = "&nbsp;> 24 hours";
+                        QSOTimeAgo = "<i>> 24 hours ago</i>";
+                        if (qso.Co == 1) {
+                            CellColor = "lime";
+                            pinRadius = 3;
+                            LastQSO.innerHTML = "&nbsp;< 10 mins";
+                            QSOTimeAgo = "<i>< 10 minutes ago</i>";
+                        } else if (qso.Co == 2) {
+                            CellColor = "green";
+                            pinRadius = 2.5;
+                            LastQSO.innerHTML = "&nbsp;< 1 hour";
+                            QSOTimeAgo = "<i>< 1 hour ago</i>";
+                        } else if (qso.Co == 3) {
+                            CellColor = "orange";
+                            pinRadius = 2;
+                            LastQSO.innerHTML = "&nbsp;< 3 hours";
+                            QSOTimeAgo = "<i>< 3 hours ago</i>";
+                        } else if (qso.Co == 4) {
+                            CellColor = "coral";
+                            pinRadius = 2;
+                            LastQSO.innerHTML = "&nbsp;< 12 hours";
+                            QSOTimeAgo = "<i>< 12 hours ago</i>";
+                        }
+                        if (document.getElementById(PageElement) !== null) {
+                            document.getElementById(PageElement).style.backgroundColor = CellColor;
+                        }
+                        if (qso.D) {
+                            if (QSOInterval > 3600) {
+                                QSOTimeAgo = "<i>Over an hour ago</i>";
+                            } else {
+                                QSOTimeAgo = Math.round(QSOInterval / 60) + " minutes ago";
+                                LastQSO.innerHTML = "&nbsp;" + QSOTimeAgo;
+                            }
+                        }
+                        if (qso.C.length > 10) {
+                            displaycallsign = qso.C.substring(0, 9) + "<small>&hellip;</small>";
+                        } else {
+                            displaycallsign = qso.C;
+                        }
+                        if (qso.B == "70" || qso.B == "23" || qso.B == "13") {
+                            units = "CM";
+                        } else {
+                            units = "M";
+                        }
+                        if (qso.F > 0) {
+                            if (qso.D != "") {
+                                if (index < ListFrom) {
+                                    qsoList.innerHTML += padDigits(index + 1, 2) + ":\t" + qso.D + "\t" + qso.F + "\t" + qso.M + "\t" + displaycallsign + "\n";
+                                }
+                                PopUpString = "<p><b>" + qso.C + "</b></p><p>" + qso.F + " " + qso.M + "<br>" + qso.D;
+                            } else {
+                                if (index < ListFrom) {
+                                    qsoList.innerHTML += padDigits(index + 1, 2) + ":\t" + qso.B + units + "\t" + qso.F + "\t" + qso.M + "\t" + displaycallsign + "\n";
+                                }
+                                PopUpString = "<p><b>" + qso.C + "</b></p><p>" + qso.F + " " + qso.M + "<br>" + QSOTimeAgo;
+                            }
+                        } else {
+                            if (qso.D != "") {
+                                if (index < ListFrom) {
+                                    qsoList.innerHTML += padDigits(index + 1, 2) + ":\t" + qso.D + "\t" + qso.B + units + "\t" + qso.M + "\t" + displaycallsign + "\n";
+                                }
+                                PopUpString = "<p><b>" + qso.C + "</b></p><p>" + qso.B + units + " " + qso.M + "<br>" + qso.D;
+                            } else {
+                                if (index < ListFrom) {
+                                    qsoList.innerHTML += padDigits(index + 1, 2) + ":\t" + qso.B + units + "\t" + qso.M + "\t" + displaycallsign + "\n";
+                                }
+                                PopUpString = "<p><b>" + qso.C + "</b></p><p>" + qso.B + units + " " + qso.M + "<br>" + QSOTimeAgo;
+                            }
+                        }
+                        if (qso.La != 0 && qso.Lo != 0) {
+                            L.circleMarker([qso.La, -qso.Lo], {
+                                radius: pinRadius,
+                                color: CellColor,
+                                weight: 2,
+                                fill: true,
+                                fillColor: CellColor,
+                                fillOpacity: 1,
+                                pane: "shadowPane"
+                            }).addTo(markerGroup).bindPopup(PopUpString);
+                            L.circleMarker([qso.La, -qso.Lo + 360], {
+                                radius: pinRadius,
+                                color: CellColor,
+                                weight: 2,
+                                fill: true,
+                                fillColor: CellColor,
+                                fillOpacity: 1,
+                                pane: "shadowPane"
+                            }).addTo(markerGroup).bindPopup(PopUpString);
+                            L.circleMarker([qso.La, -qso.Lo - 360], {
+                                radius: pinRadius,
+                                color: CellColor,
+                                weight: 2,
+                                fill: true,
+                                fillColor: CellColor,
+                                fillOpacity: 1,
+                                pane: "shadowPane"
+                            }).addTo(markerGroup).bindPopup(PopUpString);
+                        }
+                    }
+                }
+            }
+            ;
+        }
+        function padDigits(number, digits) {
+            return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
+        }
+        function IsJsonString(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+        function clearTable(band) {
+            document.getElementById("C" + band).style.backgroundColor = "grey"
+            document.getElementById("P" + band).style.backgroundColor = "grey"
+            document.getElementById("D" + band).style.backgroundColor = "grey"
+        }
+        connect();
+    </script>
+
+</body>
+</html>

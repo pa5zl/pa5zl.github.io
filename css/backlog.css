@@ -1,0 +1,192 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: sans-serif
+}
+
+.activitygrid td {
+    border: 1px solid #ddd;
+    width: 30px;
+    text-align: center;
+    background-color: #aaaa;
+    font-family: sans-serif;
+    font-size: 10pt;
+    background-color: grey;
+    border-radius: 10px;
+    height: 15px
+}
+
+.activitygrid th {
+    background-color: #aaaa;
+    font-size: 10pt
+}
+
+.activitygridtable {
+    text-align: top;
+    width: 600px;
+    text-align: center;
+    padding-left: 12px;
+    padding-bottom: 10px
+}
+
+.noborder td {
+    border: 0
+}
+
+.osm {
+    height: 350px;
+    width: 600px;
+    border: 0;
+    margin: 0;
+    border-radius: 0
+}
+
+.logo {
+    text-align: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 110px;
+    border: 0
+}
+
+.lastUpdate {
+    padding-right: 10px;
+    padding-left: 10px;
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 1px;
+    vertical-align: middle;
+    border: 0
+}
+
+.clock {
+    width: 80px;
+    border: 2px solid #db632b;
+    text-align: center;
+    border-radius: 8px
+}
+
+.numqsos {
+    width: 120px;
+    border: 2px solid #db632b;
+    text-align: center;
+    border-radius: 8px
+}
+
+.rate {
+    width: 120px;
+    border: 2px solid #db632b;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 8pt
+}
+
+.loginfo {
+    padding: 5px;
+    width: 180px;
+    border: 1px solid grey;
+    text-align: center;
+    border-radius: 8px;
+    color: orange;
+    font-size: 8pt
+}
+
+.loginfowide {
+    padding: 5px;
+    width: 210px;
+    border: 1px solid grey;
+    text-align: center;
+    border-radius: 8px;
+    color: orange;
+    font-size: 8pt
+}
+
+.syncinfo {
+    font-size: 8pt;
+    color: #fff;
+    font-family: monospace;
+}
+
+.button {
+    width: 90px;
+    padding: 5px;
+    border: 1px solid #fff;
+    background-color: #000;
+    text-align: center;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 10pt
+}
+
+.button a {
+    color: orange;
+    text-decoration: none
+}
+
+.infotext {
+    width: 140px;
+    padding-left: 20px;
+    color: #bbb;
+    text-align: center;
+    font-size: 7pt;
+    border: 0
+}
+
+.infotext a {
+    text-decoration: none;
+    color: #db632b
+}
+
+.connectedicon {
+    font-size: 7pt
+}
+
+.contentTable {
+    border: 1px solid #aaa;
+    width: 1080px;
+    border-radius: 5px
+}
+
+.statusBar {
+    text-align: center;
+    padding-bottom: 6px;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: 10pt;
+    font-family: monospace
+}
+
+.spacerCell {
+    width: 60px;
+    border-collapse: collapse;
+    border: 0;
+    background-color: #000
+}
+
+.qsoDateBox {
+    font-family: monospace;
+    color: #fff
+}
+
+.qsoList {
+    vertical-align: top;
+    padding-left: 12px;
+    padding-top: 8px;
+    font-size: 9pt;
+    color: #ecb;
+    font-family: monospace
+}
+
+.banner {
+    display: none
+}
+
+.bannerText {
+    padding-left: 20px;
+    padding-right: 15px;
+    padding-bottom: 12px;
+    font-family: monospace;
+    color: #eee;
+    font-size: 8pt;
+    border: 0
+}
